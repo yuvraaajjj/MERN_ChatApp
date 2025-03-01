@@ -164,13 +164,13 @@ const server = app.listen(PORT, () => {
 
 
 //WEBSOCKETS SERVER
-const wss = new wss.WebSocketServer({ server });
+const wss = new ws.WebSocketServer({ server });
 
-ws.on("connection", (connection, req) => {
+wss.on("connection", (connection, req) => {
 
 
     function notifyAboutOnlinePeople(){
-        [...ws.clients].forEach(client => {
+        [...wss.clients].forEach(client => {
             client.send(JSON.stringify({
                 online: [...wss.clients].map(c => ({
                     userID: c.userID || null, 
@@ -264,7 +264,7 @@ ws.on("connection", (connection, req) => {
                 text
             });
             
-            [...ws.clients]
+            [...wss.clients]
             .filter(c => c.userID === recipient)
             .forEach(c => c.send(JSON.stringify({
                 text,
