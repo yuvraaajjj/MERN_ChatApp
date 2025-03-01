@@ -154,7 +154,11 @@ app.get('/messages/:userId',async (req, res) => {
 })
 
 app.post('/logout',(req, res) => {
-    res.cookie('token','',{samesite: 'none', secure: true}).json('ok')
+    res.cookie('token','',{httpOnly: true,
+        sameSite: 'none', 
+        secure: true,
+        // expires: new Date(0),
+        path: '/' }).json('ok')
 })
 
 app.get('/people', handleOfflinePeople)
