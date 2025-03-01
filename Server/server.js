@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use(cors({
     credentials: true,
-    origin: "https://mern-chatapp-frontend-skjl.onrender.com
+    origin: "https://mern-chatapp-frontend-skjl.onrender.com"
 }));
 
 async function getUserData(req) {
