@@ -21,7 +21,9 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 });
 
 const app = express();
-const PORT = 8000;
+//#region update port number for server 
+const PORT = process.env.PORT || 8000;
+//#endregion
 
 app.use(express.json());
 app.use(cookieParser()); 
