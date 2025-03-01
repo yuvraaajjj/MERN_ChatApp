@@ -78,6 +78,10 @@ export default function Chat(){
 
     function logout(){
         axios.post('/logout').then(() => {
+            if (wsConnect) {
+                wsConnect.close();
+            }
+            
             setWSConnect(null)
             setId(null)
             setUsername(null)
