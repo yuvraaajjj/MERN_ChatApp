@@ -42,7 +42,7 @@ async function getUserData(req) {
                 resolve(userData)
             })
         }else{
-            reject.status(401).json("no token")
+            reject(new Error("no token"));
         }
     }) 
 }
