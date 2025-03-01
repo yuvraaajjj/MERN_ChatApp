@@ -17,7 +17,7 @@ async function handleRegister(req, res){
             const createdUser = await User.create({ name, lastname, username: username, password: hashedPassword, dob});
             jwt.sign({ userID: createdUser._id,username }, jwtsecret, {}, (err, token) => {
                 if (err) throw err;
-                res.cookie("token", token, {httpOnly: true,sameSite: "none", secure: true}).status(201).json({ message: "User registered successfully!", id: createdUser._id});
+                res.cookie("token", token, {httpOnly: true,sameSite: "none", secure: true, path:"/"}).status(201).json({ message: "User registered successfully!", id: createdUser._id});
             });
         } catch (err) {
             console.error("Error:", err);
@@ -45,7 +45,7 @@ async function handleLogIn(req, res) {
         if(OK){
             jwt.sign({ userID: foundUser._id,username }, jwtsecret, {}, (err, token) => {
                 if (err) throw err;
-                res.cookie("token",token,{httpOnly: true,sameSite: "none", secure: true}).status(201).json({ 
+                res.cookie("token",token,{httpOnly: true,sameSite: "none", secure: true, path:"/"}).status(201).json({ 
                     message: "User login successfully!",
                     id: foundUser._id
                 });
